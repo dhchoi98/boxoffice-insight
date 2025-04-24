@@ -14,10 +14,11 @@ def index(request):
 
 
 def daily_boxoffice(request):
-    yesterday = datetime.now(KST) - timedelta(days=1)
+    # yesterday = datetime.now(KST) - timedelta(days=1)
+    # target_date = request.GET.get('target_date',
+    #                               f'{yesterday.year:04d}-{yesterday.month:02d}-{yesterday.day:02d}')  # 날자 정보 없으면 어제날자로
     target_date = request.GET.get('target_date',
-                                  f'{yesterday.year:04d}-{yesterday.month:02d}-{yesterday.day:02d}')  # 날자 정보 없으면 어제날자로
-
+                                  f'2025-01-01')  # 날자 정보 없으면 크롤링 시작하는 날자로
     try:
         year, month, day = [int(token) for token in target_date.split('-')]
         target_dt = datetime(year=year, month=month, day=day, tzinfo=KST)
